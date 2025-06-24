@@ -1,13 +1,14 @@
 "use client"
 
 import type React from "react"
+
 import { Button } from "@/components/ui/button"
 import { ChevronDown } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState, useRef, useEffect } from "react"
 
-export default function Navigation() {
+export default function AccessibleNavigation() {
   const pathname = usePathname()
   const [servicesOpen, setServicesOpen] = useState(false)
   const [insightsOpen, setInsightsOpen] = useState(false)
@@ -47,10 +48,10 @@ export default function Navigation() {
 
   return (
     <header className="border-b border-gray-200">
-      {/* Skip to main content link for accessibility */}
+      {/* Skip to main content link */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 bg-blue-600 text-white px-4 py-2 z-50 rounded-br"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 bg-blue-600 text-white px-4 py-2 z-50"
       >
         Skip to main content
       </a>
@@ -58,10 +59,10 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 relative">
           <div className="flex items-center">
-            <Link href="/" className="flex items-center py-2" aria-label="DataOps Group - Home">
+            <Link href="/" className="flex items-center py-2">
               <img
                 src="/images/dataops-logo-horizontal.jpg"
-                alt="DataOps Group - Expert HubSpot Implementation and Data Operations Consulting"
+                alt="DataOps Group - Expert HubSpot Implementation and Data Operations Consulting - Home"
                 className="w-[200px] h-[68px] object-contain"
               />
             </Link>
@@ -71,7 +72,7 @@ export default function Navigation() {
             {/* Services Dropdown */}
             <div className="relative" ref={servicesRef}>
               <button
-                className={`text-base hover:text-blue-600 flex items-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-2 py-1 ${
+                className={`text-base hover:text-blue-600 flex items-center ${
                   pathname.startsWith("/services") ? "text-blue-600 font-medium" : "text-gray-700"
                 }`}
                 onClick={() => setServicesOpen(!servicesOpen)}
@@ -85,10 +86,10 @@ export default function Navigation() {
 
               {servicesOpen && (
                 <div className="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-                  <div className="py-2" role="menu" aria-label="Services submenu">
+                  <div className="py-2" role="menu">
                     <Link
                       href="/services/analytics-bi"
-                      className="block px-4 py-2 text-base hover:bg-gray-50 hover:text-blue-600 text-gray-700 focus:bg-gray-50 focus:text-blue-600 focus:outline-none"
+                      className="block px-4 py-2 text-base hover:bg-gray-50 hover:text-blue-600 text-gray-700"
                       role="menuitem"
                       onClick={() => setServicesOpen(false)}
                     >
@@ -96,7 +97,7 @@ export default function Navigation() {
                     </Link>
                     <Link
                       href="/services/dataops-implementation"
-                      className="block px-4 py-2 text-base hover:bg-gray-50 hover:text-blue-600 text-gray-700 focus:bg-gray-50 focus:text-blue-600 focus:outline-none"
+                      className="block px-4 py-2 text-base hover:bg-gray-50 hover:text-blue-600 text-gray-700"
                       role="menuitem"
                       onClick={() => setServicesOpen(false)}
                     >
@@ -104,7 +105,7 @@ export default function Navigation() {
                     </Link>
                     <Link
                       href="/services/team-training"
-                      className="block px-4 py-2 text-base hover:bg-gray-50 hover:text-blue-600 text-gray-700 focus:bg-gray-50 focus:text-blue-600 focus:outline-none"
+                      className="block px-4 py-2 text-base hover:bg-gray-50 hover:text-blue-600 text-gray-700"
                       role="menuitem"
                       onClick={() => setServicesOpen(false)}
                     >
@@ -112,7 +113,7 @@ export default function Navigation() {
                     </Link>
                     <Link
                       href="/services/marketing-operations-revops"
-                      className="block px-4 py-2 text-base hover:bg-gray-50 hover:text-blue-600 text-gray-700 focus:bg-gray-50 focus:text-blue-600 focus:outline-none"
+                      className="block px-4 py-2 text-base hover:bg-gray-50 hover:text-blue-600 text-gray-700"
                       role="menuitem"
                       onClick={() => setServicesOpen(false)}
                     >
@@ -125,7 +126,7 @@ export default function Navigation() {
 
             <Link
               href="/about"
-              className={`text-base hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-2 py-1 ${
+              className={`text-base hover:text-blue-600 ${
                 isActive("/about") ? "text-blue-600 font-medium" : "text-gray-700"
               }`}
             >
@@ -134,7 +135,7 @@ export default function Navigation() {
 
             <Link
               href="/approach"
-              className={`text-base hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-2 py-1 ${
+              className={`text-base hover:text-blue-600 ${
                 isActive("/approach") ? "text-blue-600 font-medium" : "text-gray-700"
               }`}
             >
@@ -144,7 +145,7 @@ export default function Navigation() {
             {/* Insights Dropdown */}
             <div className="relative" ref={insightsRef}>
               <button
-                className={`text-base hover:text-blue-600 flex items-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-2 py-1 ${
+                className={`text-base hover:text-blue-600 flex items-center ${
                   pathname.startsWith("/insights") ? "text-blue-600 font-medium" : "text-gray-700"
                 }`}
                 onClick={() => setInsightsOpen(!insightsOpen)}
@@ -158,26 +159,26 @@ export default function Navigation() {
 
               {insightsOpen && (
                 <div className="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-                  <div className="py-2" role="menu" aria-label="Insights submenu">
+                  <div className="py-2" role="menu">
                     <Link
                       href="/insights"
-                      className="block px-4 py-2 text-base hover:bg-gray-50 hover:text-blue-600 text-gray-700 focus:bg-gray-50 focus:text-blue-600 focus:outline-none"
+                      className="block px-4 py-2 text-base hover:bg-gray-50 hover:text-blue-600 text-gray-700"
                       role="menuitem"
                       onClick={() => setInsightsOpen(false)}
                     >
                       All Insights
                     </Link>
                     <Link
-                      href="/pe-value-creation"
-                      className="block px-4 py-2 text-base hover:bg-gray-50 hover:text-blue-600 text-gray-700 focus:bg-gray-50 focus:text-blue-600 focus:outline-none"
+                      href="/insights/hubspot-for-private-equity"
+                      className="block px-4 py-2 text-base hover:bg-gray-50 hover:text-blue-600 text-gray-700"
                       role="menuitem"
                       onClick={() => setInsightsOpen(false)}
                     >
-                      PE Value Creation
+                      HubSpot for Private Equity
                     </Link>
                     <Link
                       href="/guides/hubspot-expert"
-                      className="block px-4 py-2 text-base hover:bg-gray-50 hover:text-blue-600 text-gray-700 focus:bg-gray-50 focus:text-blue-600 focus:outline-none"
+                      className="block px-4 py-2 text-base hover:bg-gray-50 hover:text-blue-600 text-gray-700"
                       role="menuitem"
                       onClick={() => setInsightsOpen(false)}
                     >
@@ -190,12 +191,12 @@ export default function Navigation() {
           </nav>
 
           <div className="flex items-center space-x-4">
-            <Button className="text-white rounded-none bg-green-500 hover:bg-green-600 focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+            <Button className="text-white rounded-none bg-green-500 hover:bg-green-600">
               <Link href="/contact">Get Started</Link>
             </Button>
             <div className="relative">
-              <Button className="text-gray-900 hover:bg-yellow-500 rounded-none bg-yellow-400 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
-                <Link href="/data-operations-assessment">📖 Copy Our Playbook</Link>
+              <Button className="text-gray-900 hover:bg-yellow-500 rounded-none bg-yellow-400">
+                <Link href="/book">📖 Copy Our Playbook</Link>
               </Button>
               <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
                 NEW

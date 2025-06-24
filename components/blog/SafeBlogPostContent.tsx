@@ -1,12 +1,12 @@
 import type { BlogPost } from "@/types/blog"
-import type React from "react"
 import { createSafeHtml } from "@/lib/sanitize"
+import type React from "react"
 
-interface BlogPostContentProps {
+interface SafeBlogPostContentProps {
   post: BlogPost
 }
 
-const BlogPostContent: React.FC<BlogPostContentProps> = ({ post }) => {
+const SafeBlogPostContent: React.FC<SafeBlogPostContentProps> = ({ post }) => {
   return (
     <div className="blog-content">
       {/* Add a colored accent bar at the top */}
@@ -42,4 +42,4 @@ const BlogPostContent: React.FC<BlogPostContentProps> = ({ post }) => {
   )
 }
 
-export default BlogPostContent
+export default SafeBlogPostContent

@@ -1,10 +1,10 @@
 import PageLayout from "@/components/layout/PageLayout"
-import ClientHomePage from "./ClientHomePage"
+import OptimizedHomePage from "@/components/OptimizedHomePage"
 
 export default function HomePage() {
   return (
     <PageLayout>
-      <ClientHomePage />
+      <OptimizedHomePage />
     </PageLayout>
   )
 }

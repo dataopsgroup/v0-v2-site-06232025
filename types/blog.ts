@@ -2,19 +2,31 @@ export interface BlogPost {
   id: string
   title: string
   excerpt: string
-  content?: string
-  author: string
   date: string
+  author: string
   category: string
+  coverImage?: string
+  content: string
   tags?: string[]
-  readTime?: number
-  featured?: boolean
-  published?: boolean
+  seo: {
+    metaDescription: string
+    keywords: string
+    ogTitle: string
+    ogDescription: string
+    twitterTitle: string
+    twitterDescription: string
+  }
 }
 
 export interface BlogCategory {
-  id: string
   name: string
-  description: string
-  count: number
+  slug: string
+  description?: string
+  count?: number
+}
+
+export interface BlogSearchResult {
+  posts: BlogPost[]
+  totalCount: number
+  query: string
 }

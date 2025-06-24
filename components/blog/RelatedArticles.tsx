@@ -48,7 +48,7 @@ const getCategoryColor = (category: string): string => {
   return categoryColors[category] || "bg-gray-600 text-white hover:bg-gray-700"
 }
 
-export function RelatedArticles({ posts }: RelatedArticlesProps) {
+export default function RelatedArticles({ posts }: RelatedArticlesProps) {
   if (!posts || posts.length === 0) {
     return null
   }

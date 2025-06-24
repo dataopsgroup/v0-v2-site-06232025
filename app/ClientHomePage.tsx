@@ -1,168 +1,55 @@
-"use client"
-
-import { Button } from "@/components/ui/button"
-import { Database, BookOpen, BarChart3 } from "lucide-react"
-import Link from "next/link"
-
-export default function ClientHomePage() {
+const ClientHomePage = () => {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section
-        className="bg-gray-50 relative overflow-hidden py-20"
-        style={{
-          backgroundImage: "url(/images/hero-wireframe-bg.jpg)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        {/* Overlay to control opacity */}
-        <div className="absolute inset-0 bg-gray-50 opacity-75"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <p className="text-sm text-gray-600">PE Portfolio Transformation</p>
-                <h1 className="text-5xl lg:text-6xl text-gray-900 leading-tight">
-                  Turn PE Portfolio
-                  <br />
-                  Operations Into
-                  <br />
-                  Profit Drivers
-                  <span className="block text-yellow-500 mt-2">in 100 Days</span>
-                </h1>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-base">
-                  <Link href="/data-operations-assessment">Get Your Free Assessment</Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Value Proposition */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-12">
-            <div>
-              <p className="text-sm text-gray-600 mb-4">Our Expertise</p>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                We are PE-specialized{" "}
-                <Link href="/about" className="text-blue-600 hover:underline">
-                  HubSpot experts
-                </Link>{" "}
-                who transform fragmented systems into unified platforms that drive visibility, streamline reporting,
-                improve efficiency, and create the data infrastructure your investors expect.
-              </p>
-              <ul className="space-y-3 mt-6">
-                <li className="flex items-center text-gray-700">
-                  <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mr-3"></div>
-                  <span>19% higher valuation multiples</span>
-                </li>
-                <li className="flex items-center text-gray-700">
-                  <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mr-3"></div>
-                  <span>73% faster EBITDA growth</span>
-                </li>
-                <li className="flex items-center text-gray-700">
-                  <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mr-3"></div>
-                  <span>$18-22 ROI per $1 invested in HubSpot</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="md:col-span-2 bg-green-50 p-8 space-y-8">
-              <div>
-                <p className="text-sm text-gray-600 mb-4">Proven Results</p>
-                <h3 className="text-xl text-gray-900">Trusted by 50+ Companies to Rescue Their HubSpot Investments</h3>
-              </div>
-              <div className="grid grid-cols-3 gap-px bg-gray-200">
-                <div className="bg-white p-6 hover:bg-gray-50 transition-colors text-center space-y-2">
-                  <div className="text-3xl text-blue-600">47%</div>
-                  <div className="text-sm text-gray-600">in 90 days</div>
-                  <div className="text-xs text-gray-400">Audio Visual Equipment Wholesaler</div>
-                </div>
-                <div className="bg-white p-6 hover:bg-gray-50 transition-colors text-center space-y-2">
-                  <div className="text-3xl text-blue-600">28%</div>
-                  <div className="text-sm text-gray-600">Reduced sales cycle</div>
-                  <div className="text-xs text-gray-400">Multi-National Insurance Provider</div>
-                </div>
-                <div className="bg-white p-6 hover:bg-gray-50 transition-colors text-center space-y-2">
-                  <div className="text-3xl text-blue-600">35%</div>
-                  <div className="text-sm text-gray-600">Improvement in close rates</div>
-                  <div className="text-xs text-gray-400">SaaS Healthcare Tech</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-12">
-            <h2 className="text-3xl text-gray-900 mb-4">Our Transformation Services</h2>
-            <p className="text-gray-700 max-w-3xl leading-relaxed">
-              Comprehensive HubSpot implementation and data operations solutions designed to transform your business.
+    <div className="relative bg-gray-100 overflow-hidden">
+      <div className="relative pt-6 pb-16 sm:pb-24">
+        {/* Hero section */}
+        <div className="mt-8 mx-auto max-w-screen-xl sm:mt-12 sm:px-6 md:mt-20 lg:mt-24 lg:px-8 xl:mt-28">
+          <div className="sm:text-center lg:text-left">
+            <h2 className="text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-5xl sm:leading-none md:text-6xl">
+              Data to enrich your
+              <br className="xl:hidden" />
+              <span className="text-indigo-600">online business</span>
+            </h2>
+            <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
+              fugiat veniam occaecat fugiat aliqua.
             </p>
-          </div>
-
-          <div className="grid grid-cols-3 gap-px bg-gray-200 mb-8">
-            <div className="bg-white p-8 hover:bg-gray-50 transition-colors">
-              <div className="w-12 h-12 mb-6 flex items-center justify-center">
-                <BarChart3 className="h-8 w-8 text-blue-600" strokeWidth={1} />
+            <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+              <div className="rounded-md shadow">
+                <a
+                  href="#"
+                  className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10"
+                >
+                  Get started
+                </a>
               </div>
-              <h3 className="text-lg text-gray-900 mb-3">Analytics & BI</h3>
-              <p className="text-sm text-gray-600 mb-4 leading-relaxed">
-                Transform data into actionable insights with comprehensive analytics and business intelligence
-                solutions.
-              </p>
-            </div>
-
-            <div className="bg-white p-8 hover:bg-gray-50 transition-colors">
-              <div className="w-12 h-12 mb-6 flex items-center justify-center">
-                <Database className="h-8 w-8 text-blue-600" strokeWidth={1} />
+              <div className="mt-3 sm:mt-0 sm:ml-3">
+                <a
+                  href="#"
+                  className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-50 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10"
+                >
+                  Live demo
+                </a>
               </div>
-              <h3 className="text-lg text-gray-900 mb-3">DataOps Implementation</h3>
-              <p className="text-sm text-gray-600 mb-4 leading-relaxed">
-                Streamline your data operations with automated processes and improved data quality.
-              </p>
-            </div>
-
-            <div className="bg-white p-8 hover:bg-gray-50 transition-colors">
-              <div className="w-12 h-12 mb-6 flex items-center justify-center">
-                <BookOpen className="h-8 w-8 text-blue-600" strokeWidth={1} />
-              </div>
-              <h3 className="text-lg text-gray-900 mb-3">HubSpot Training</h3>
-              <p className="text-sm text-gray-600 mb-4 leading-relaxed">
-                Comprehensive HubSpot setup and team training to maximize your investment.
-              </p>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+      <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+        <img
+          className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
+          src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
+          alt=""
+        />
+      </div>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-blue-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-8">
-            <div className="space-y-4">
-              <h2 className="text-3xl text-white">Ready to Transform Your Operations?</h2>
-            </div>
-            <p className="text-lg text-blue-100 max-w-3xl mx-auto leading-relaxed">
-              Join 50+ companies that have already transformed their business operations with DataOps Group.
-            </p>
-            <div className="flex justify-center">
-              <Button className="text-gray-900 hover:bg-yellow-500 px-8 py-3 text-base bg-yellow-400">
-                <Link href="/data-operations-assessment">Get Your Free Assessment</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Overlay and Content */}
+      <div className="relative">
+        <div className="absolute inset-0 bg-white opacity-70 z-10"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">{/* Your content here */}</div>
+      </div>
     </div>
   )
 }
+
+export default ClientHomePage
