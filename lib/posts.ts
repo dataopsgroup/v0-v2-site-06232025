@@ -1,71 +1,35 @@
-// lib/posts.ts
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import { remark } from 'remark';
-import html from 'remark-html';
+import { getAllPosts as getBlogPosts } from "@/data/blog"
 
-const postsDirectory = path.join(process.cwd(), 'content/blog');
-
-export function getSortedPostsData() {
-  // Get file names under /content/blog
-  const fileNames = fs.readdirSync(postsDirectory);
-  const allPostsData = fileNames.map((fileName) => {
-    // Remove ".md" from file name to get id
-    const id = fileName.replace(/\.md$/, '');
-
-    // Read markdown file as string
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-
-    // Use gray-matter to parse the post metadata section
-    const matterResult = matter(fileContents);
-
-    // Combine the data with the id
-    return {
-      id,
-      ...(matterResult.data as { date: string; title: string }),
-    };
-  });
-  // Sort posts by date
-  return allPostsData.sort((a, b) => {
-    if (a.date < b.date) {
-      return 1;
-    } else {
-      return -1;
-    }
-  });
+export function getAllPostIds() {
+  try {
+    const posts = getBlogPosts()
+    return posts.map((post) => ({
+      id: post.id,
+    }))
+  } catch (error) {
+    console.error("Error getting post IDs:", error)
+    return []
+  }
 }
 
 export async function getPostData(id: string) {
-  const fullPath = path.join(postsDirectory, `${id}.md`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  try {
+    const posts = getBlogPosts()
+    const post = posts.find((post) => post.id === id)
 
-  // Use gray-matter to parse the post metadata section
-  const matterResult = matter(fileContents);
+    if (!post) {
+      return null
+    }
 
-  // Use remark to convert markdown into HTML string
-  const processedContent = await remark()
-    .use(html)
-    .process(matterResult.content);
-  const contentHtml = processedContent.toString();
-
-  // Combine the data with the id and contentHtml
-  return {
-    id,
-    contentHtml,
-    ...(matterResult.data as { date: string; title: string }),
-  };
-}
-
-export function getAllPostIds() {
-  const fileNames = fs.readdirSync(postsDirectory);
-
-  return fileNames.map((fileName) => {
     return {
-      params: {
-        id: fileName.replace(/\.md$/, ''),
-      },
-    };
-  });
+      id: post.id,
+      title: post.title,
+      date: post.date,
+      contentHtml: post.content,
+      ...post,
+    }
+  } catch (error) {
+    console.error("Error getting post data:", error)
+    return null
+  }
 }
