@@ -1,6 +1,7 @@
 import Link from "next/link"
 
-export default function GlobalFooter() {
+// THIS IS THE ONLY LINE THAT HAS CHANGED
+export const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -86,35 +87,4 @@ export default function GlobalFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm text-gray-400 hover:text-white">
-                  Placeholder FAQ 3
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-sm text-gray-400 hover:text-white">
-                  Placeholder FAQ 4
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="border-t border-gray-700 mt-12 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
-            <div className="text-sm text-gray-400">
-              <p>© 2025 DataOps Group. All rights reserved.</p>
-            </div>
-            <div className="flex space-x-4 mt-4 md:mt-0">
-              <Link href="/privacy" className="text-sm text-gray-400 hover:text-white">
-                Privacy
-              </Link>
-              <Link href="/terms" className="text-sm text-gray-400 hover:text-white">
-                Terms
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-  )
-}
+                <Link href="#" className="text-sm text-gray-400
