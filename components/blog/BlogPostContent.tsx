@@ -1,6 +1,5 @@
 import type { BlogPost } from "@/types/blog"
 import type React from "react"
-import { createSafeHtml } from "@/lib/sanitize"
 
 interface BlogPostContentProps {
   post: BlogPost
@@ -33,7 +32,7 @@ const BlogPostContent: React.FC<BlogPostContentProps> = ({ post }) => {
           [&_th]:border [&_th]:border-gray-300 [&_th]:bg-gray-100 [&_th]:px-4 [&_th]:py-2 [&_th]:text-left [&_th]:font-semibold
           [&_td]:border [&_td]:border-gray-300 [&_td]:px-4 [&_td]:py-2
           [&_img]:rounded-lg [&_img]:shadow-md [&_img]:my-6"
-        dangerouslySetInnerHTML={createSafeHtml(post.content || post.excerpt)}
+        dangerouslySetInnerHTML={{ __html: post.content || post.excerpt }}
       />
 
       {/* Add a colored accent bar at the bottom */}

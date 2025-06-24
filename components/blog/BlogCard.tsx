@@ -6,7 +6,7 @@ interface BlogCardProps {
   post: BlogPost
 }
 
-export default function BlogCard({ post }: BlogCardProps) {
+export function BlogCard({ post }: BlogCardProps) {
   const readTime = calculateReadTime(post.content || "")
 
   // Category color mapping with better variety and contrast
@@ -53,3 +53,5 @@ export default function BlogCard({ post }: BlogCardProps) {
     </Link>
   )
 }
+
+export default BlogCard

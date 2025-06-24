@@ -9,7 +9,7 @@ interface BlogPostHeaderProps {
   post: BlogPost
 }
 
-export default function BlogPostHeader({ post }: BlogPostHeaderProps) {
+export function BlogPostHeader({ post }: BlogPostHeaderProps) {
   const readTime = calculateReadTime(post.content || "")
 
   // Category color mapping

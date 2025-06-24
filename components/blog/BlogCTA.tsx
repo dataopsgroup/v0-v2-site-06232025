@@ -15,13 +15,13 @@ interface BlogCTAProps {
   sectionVariant?: "dark" | "light"
 }
 
-export default function BlogCTA({
+export const BlogCTA = ({
   title,
   description,
   primaryButton,
   secondaryButton,
   sectionVariant = "dark",
-}: BlogCTAProps) {
+}: BlogCTAProps) => {
   const sectionClasses =
     sectionVariant === "dark"
       ? "bg-blue-900 text-white"
@@ -59,3 +59,5 @@ export default function BlogCTA({
     </section>
   )
 }
+
+export default BlogCTA

@@ -1,81 +1,63 @@
 import { notFound } from "next/navigation"
-import { getPostBySlug, calculateReadTime } from "@/lib/blog"
-import BlogPostHeader from "@/components/blog/BlogPostHeader"
-import SafeBlogPostContent from "@/components/blog/SafeBlogPostContent"
-import RelatedArticles from "@/components/blog/RelatedArticles"
-import BlogCTA from "@/components/blog/BlogCTA"
-import StructuredData from "@/components/seo/StructuredData"
-import type { Metadata } from "next"
+import { getAllPosts, getPostBySlug } from "@/data/blog"
+import { BlogPostHeader } from "@/components/blog/BlogPostHeader"
+import BlogPostContent from "@/components/blog/BlogPostContent"
+import { RelatedArticles } from "@/components/blog/RelatedArticles"
+import { BlogCTA } from "@/components/blog/BlogCTA"
 
 interface BlogPostPageProps {
-  params: Promise<{ slug: string }>
+  params: {
+    slug: string
+  }
 }
 
-export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-  const { slug } = await params
-  const post = getPostBySlug(slug)
+export async function generateStaticParams() {
+  const posts = getAllPosts()
+  return posts.map((post) => ({
+    slug: post.id,
+  }))
+}
+
+export async function generateMetadata({ params }: BlogPostPageProps) {
+  const post = getPostBySlug(params.slug)
 
   if (!post) {
     return {
-      title: "Blog Post Not Found",
-      description: "The requested blog post could not be found.",
+      title: "Post Not Found",
     }
   }
 
   return {
-    title: `${post.seo.ogTitle} | DataOps Insights`,
-    description: post.seo.metaDescription,
-    keywords: post.seo.keywords,
-    openGraph: {
-      title: post.seo.ogTitle,
-      description: post.seo.ogDescription,
-      type: "article",
-      publishedTime: post.date,
-      authors: [post.author],
-      images: post.coverImage ? [post.coverImage] : [],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.seo.twitterTitle,
-      description: post.seo.twitterDescription,
-      images: post.coverImage ? [post.coverImage] : [],
-    },
+    title: post.seo?.metaTitle || post.title,
+    description: post.seo?.metaDescription || post.excerpt,
+    keywords: post.seo?.keywords?.join(", "),
   }
 }
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug } = await params
-  const post = getPostBySlug(slug)
+export default function BlogPostPage({ params }: BlogPostPageProps) {
+  const post = getPostBySlug(params.slug)
 
   if (!post) {
     notFound()
   }
 
-  const readTime = calculateReadTime(post.content)
-
   return (
-    <>
-      <StructuredData type="Article" data={post} />
-      <article className="min-h-screen bg-white">
-        <BlogPostHeader
-          title={post.title}
-          excerpt={post.excerpt}
-          date={post.date}
-          author={post.author}
-          category={post.category}
-          readTime={readTime}
-          coverImage={post.coverImage}
-        />
+    <article>
+      <BlogPostHeader post={post} />
 
-        <div className="container mx-auto px-4 py-12">
-          <div className="max-w-4xl mx-auto">
-            <SafeBlogPostContent post={post} />
+      <div className="container mx-auto px-4 py-12">
+        <div className="max-w-4xl mx-auto">
+          <BlogPostContent post={post} />
+
+          <div className="mt-16">
             <BlogCTA />
           </div>
-        </div>
 
-        <RelatedArticles currentPostId={post.id} category={post.category} />
-      </article>
-    </>
+          <div className="mt-16">
+            <RelatedArticles currentPostId={post.id} category={post.category} />
+          </div>
+        </div>
+      </div>
+    </article>
   )
 }

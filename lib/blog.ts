@@ -1,5 +1,5 @@
 import type { BlogPost } from "@/types/blog"
-import { allBlogPosts } from "@/data/blog/index"
+import { getAllPosts as getAllPostsFromData } from "@/data/blog/index"
 
 export function formatDate(dateString: string): string {
   const date = new Date(dateString)
@@ -25,34 +25,68 @@ export function slugify(text: string): string {
 }
 
 export function getAllPosts(): BlogPost[] {
-  // Sort posts by date (newest first)
-  return allBlogPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  try {
+    return getAllPostsFromData()
+  } catch (error) {
+    console.error("Error getting blog posts:", error)
+    return []
+  }
 }
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
-  return allBlogPosts.find((post) => post.id === slug)
+  try {
+    const posts = getAllPosts()
+    return posts.find((post) => post.id === slug)
+  } catch (error) {
+    console.error("Error getting post by slug:", error)
+    return undefined
+  }
 }
 
 export function getPostsByCategory(category: string): BlogPost[] {
-  return allBlogPosts.filter((post) => post.category === category)
+  try {
+    const posts = getAllPosts()
+    return posts.filter((post) => post.category === category)
+  } catch (error) {
+    console.error("Error getting posts by category:", error)
+    return []
+  }
 }
 
 export function searchPosts(query: string): BlogPost[] {
-  const lowercaseQuery = query.toLowerCase()
-  return allBlogPosts.filter(
-    (post) =>
-      post.title.toLowerCase().includes(lowercaseQuery) ||
-      post.excerpt.toLowerCase().includes(lowercaseQuery) ||
-      post.content.toLowerCase().includes(lowercaseQuery) ||
-      post.tags?.some((tag) => tag.toLowerCase().includes(lowercaseQuery)),
-  )
+  try {
+    const posts = getAllPosts()
+    const lowercaseQuery = query.toLowerCase()
+    return posts.filter(
+      (post) =>
+        post.title.toLowerCase().includes(lowercaseQuery) ||
+        post.excerpt.toLowerCase().includes(lowercaseQuery) ||
+        post.content.toLowerCase().includes(lowercaseQuery) ||
+        post.tags?.some((tag) => tag.toLowerCase().includes(lowercaseQuery)),
+    )
+  } catch (error) {
+    console.error("Error searching posts:", error)
+    return []
+  }
 }
 
 export function getCategories(): string[] {
-  const categories = [...new Set(allBlogPosts.map((post) => post.category))]
-  return categories.sort()
+  try {
+    const posts = getAllPosts()
+    const categories = [...new Set(posts.map((post) => post.category))]
+    return categories.sort()
+  } catch (error) {
+    console.error("Error getting categories:", error)
+    return []
+  }
 }
 
 export function getRelatedPosts(currentPostId: string, category: string, limit = 3): BlogPost[] {
-  return allBlogPosts.filter((post) => post.id !== currentPostId && post.category === category).slice(0, limit)
+  try {
+    const posts = getAllPosts()
+    return posts.filter((post) => post.id !== currentPostId && post.category === category).slice(0, limit)
+  } catch (error) {
+    console.error("Error getting related posts:", error)
+    return []
+  }
 }
