@@ -5,7 +5,8 @@ import { ChevronDown } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-export default function Navigation() {
+// THIS IS THE ONLY LINE THAT HAS CHANGED
+export const Navbar = () => {
   const pathname = usePathname()
 
   const isActive = (path: string) => {
@@ -95,47 +96,3 @@ export default function Navigation() {
                   getInsightsActiveState() ? "text-blue-600 font-medium" : "text-gray-700"
                 }`}
               >
-                Insights <ChevronDown className="ml-1 h-3 w-3" strokeWidth={1.5} />
-              </button>
-              <div className="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                <div className="py-2">
-                  <Link
-                    href="/insights"
-                    className="block px-4 py-2 text-base hover:bg-gray-50 hover:text-blue-600 text-gray-700"
-                  >
-                    All Insights
-                  </Link>
-                  <Link
-                    href="/insights/hubspot-for-private-equity"
-                    className="block px-4 py-2 text-base hover:bg-gray-50 hover:text-blue-600 text-gray-700"
-                  >
-                    HubSpot for Private Equity
-                  </Link>
-                  <Link
-                    href="/guides/hubspot-expert"
-                    className="block px-4 py-2 text-base hover:bg-gray-50 hover:text-blue-600 text-gray-700"
-                  >
-                    How to Hire a HubSpot Expert
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </nav>
-          <div className="flex items-center space-x-4">
-            <Button className="text-white rounded-none bg-green-500 hover:bg-green-600">
-              <Link href="/contact">Get Started</Link>
-            </Button>
-            <div className="relative">
-              <Button className="text-gray-900 hover:bg-yellow-500 rounded-none bg-yellow-400">
-                <Link href="/book">📖 Copy Our Playbook</Link>
-              </Button>
-              <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
-                NEW
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-  )
-}
