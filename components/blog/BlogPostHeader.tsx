@@ -1,60 +1,79 @@
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Calendar, Clock, ArrowLeft } from "lucide-react"
-import Link from "next/link"
+"use client"
 import type { BlogPost } from "@/types/blog"
-import { formatDate, calculateReadTime } from "@/lib/blog"
+import { Badge } from "@/components/ui/badge"
 
 interface BlogPostHeaderProps {
   post: BlogPost
 }
 
 export function BlogPostHeader({ post }: BlogPostHeaderProps) {
-  const readTime = calculateReadTime(post.content || "")
+  // Safe date formatting with error handling
+  const formatDate = (dateString?: string) => {
+    try {
+      if (!dateString) return "Date not available"
 
-  // Category color mapping
-  const getCategoryColor = (category: string) => {
-    const colors: Record<string, string> = {
-      Analytics: "bg-blue-600 text-white",
-      Operations: "bg-green-600 text-white",
-      "Tips & Tricks": "bg-purple-600 text-white",
-      "Case Studies": "bg-orange-600 text-white",
-      Guides: "bg-indigo-600 text-white",
-      Strategy: "bg-red-600 text-white",
-      "Private Equity": "bg-gray-700 text-white",
-      HubSpot: "bg-yellow-600 text-white",
+      const date = new Date(dateString)
+      if (isNaN(date.getTime())) return "Invalid date"
+
+      return date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    } catch (error) {
+      console.error("Error formatting date:", error)
+      return "Date not available"
     }
-    return colors[category] || "bg-slate-600 text-white"
+  }
+
+  // Safe category color mapping
+  const getCategoryColor = (category?: string) => {
+    if (!category) return "default"
+
+    const colorMap: Record<string, string> = {
+      "Data Strategy": "blue",
+      HubSpot: "orange",
+      "Marketing Analytics": "green",
+      CRM: "purple",
+      Automation: "red",
+    }
+
+    return colorMap[category] || "default"
   }
 
   return (
-    <header className="py-20 bg-gradient-to-br from-blue-900 to-blue-700">
+    <header className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center text-white">
-          <Badge className={`mb-6 ${getCategoryColor(post.category)}`}>{post.category}</Badge>
+        <div className="max-w-4xl mx-auto text-center">
+          {post?.category && (
+            <Badge variant="secondary" className={`mb-4 bg-white/20 text-white hover:bg-white/30`}>
+              {post.category}
+            </Badge>
+          )}
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">{post.title}</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">{post?.title || "Untitled Post"}</h1>
 
-          <p className="text-xl md:text-2xl mb-8 text-white/90">{post.excerpt}</p>
+          {post?.excerpt && <p className="text-xl text-blue-100 mb-6 max-w-3xl mx-auto">{post.excerpt}</p>}
 
-          <div className="flex items-center justify-center gap-6 text-white/80 flex-wrap">
-            <div className="flex items-center gap-2">
-              <Calendar className="w-5 h-5" />
-              <span>{formatDate(post.date)}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock className="w-5 h-5" />
-              <span>{readTime} min read</span>
-            </div>
-            <Link href="/insights">
-              <Button
-                variant="outline"
-                className="bg-white hover:bg-gray-50 border-white hover:border-gray-200 transition-colors text-blue-900"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Insights
-              </Button>
-            </Link>
+          <div className="flex flex-wrap justify-center items-center gap-4 text-blue-100">
+            {post?.author && <span>By {post.author}</span>}
+
+            <span>•</span>
+
+            <time dateTime={post?.date}>{formatDate(post?.date)}</time>
+
+            {post?.tags && post.tags.length > 0 && (
+              <>
+                <span>•</span>
+                <div className="flex flex-wrap gap-2">
+                  {post.tags.slice(0, 3).map((tag, index) => (
+                    <Badge key={`${tag}-${index}`} variant="outline" className="bg-white/10 text-white border-white/20">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

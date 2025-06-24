@@ -6,9 +6,7 @@ import { RelatedArticles } from "@/components/blog/RelatedArticles"
 import { BlogCTA } from "@/components/blog/BlogCTA"
 
 interface BlogPostPageProps {
-  params: {
-    slug: string
-  }
+  params: Promise<{ slug: string }>
 }
 
 export async function generateStaticParams() {
@@ -19,7 +17,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps) {
-  const post = getPostBySlug(params.slug)
+  const { slug } = await params
+  const post = getPostBySlug(slug)
 
   if (!post) {
     return {
@@ -30,12 +29,13 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
   return {
     title: post.seo?.metaTitle || post.title,
     description: post.seo?.metaDescription || post.excerpt,
-    keywords: post.seo?.keywords?.join(", "),
+    keywords: post.seo?.keywords?.join(", ") || "",
   }
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = getPostBySlug(params.slug)
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { slug } = await params
+  const post = getPostBySlug(slug)
 
   if (!post) {
     notFound()
