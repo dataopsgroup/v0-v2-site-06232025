@@ -1,6 +1,21 @@
 import type { BlogPost } from "@/types/blog"
 import { allBlogPosts } from "@/data/blog"
 
+export function calculateReadTime(content: string): number {
+  const wordsPerMinute = 200
+  const wordCount = content.split(/\s+/).length
+  return Math.ceil(wordCount / wordsPerMinute)
+}
+
+export function formatDate(dateString: string): string {
+  const date = new Date(dateString)
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  })
+}
+
 // Safe blog post retrieval with error handling
 export function getAllPosts(): BlogPost[] {
   try {

@@ -1,12 +1,12 @@
 import type { BlogPost } from "@/types/blog"
-import customerAcquisitionCost from "./customer-acquisition-cost"
+// import customerAcquisitionCost from "./customer-acquisition-cost"
 import crmCleanupPlan from "./crm-cleanup-plan"
 import threeTipsForSmartWorkflows from "./3-tips-for-smart-workflows"
 import howToHireAHubspotConsultant from "./how-to-hire-a-hubspot-consultant"
 import marketingDataManagement from "./marketing-data-management"
 
 export const allBlogPosts: BlogPost[] = [
-  customerAcquisitionCost,
+  // customerAcquisitionCost, // Temporarily removed to isolate href error
   crmCleanupPlan,
   threeTipsForSmartWorkflows,
   howToHireAHubspotConsultant,
